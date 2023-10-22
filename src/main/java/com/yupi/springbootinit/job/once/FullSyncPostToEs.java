@@ -1,9 +1,9 @@
 package com.yupi.springbootinit.job.once;
 
-import com.yupi.springbootinit.esdao.PostEsDao;
-import com.yupi.springbootinit.model.dto.post.PostEsDTO;
-import com.yupi.springbootinit.model.entity.Post;
-import com.yupi.springbootinit.service.PostService;
+import com.yupi.springbootinit.esdao.ChartEsDao;
+import com.yupi.springbootinit.model.dto.chart.ChartEsDTO;
+import com.yupi.springbootinit.model.entity.Chart;
+import com.yupi.springbootinit.service.ChartService;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.annotation.Resource;
@@ -20,29 +20,29 @@ import org.springframework.boot.CommandLineRunner;
 // todo 取消注释开启任务
 //@Component
 @Slf4j
-public class FullSyncPostToEs implements CommandLineRunner {
+public class FullSyncChartToEs implements CommandLineRunner {
 
     @Resource
-    private PostService postService;
+    private ChartService chartService;
 
     @Resource
-    private PostEsDao postEsDao;
+    private ChartEsDao chartEsDao;
 
     @Override
     public void run(String... args) {
-        List<Post> postList = postService.list();
-        if (CollectionUtils.isEmpty(postList)) {
+        List<Chart> chartList = chartService.list();
+        if (CollectionUtils.isEmpty(chartList)) {
             return;
         }
-        List<PostEsDTO> postEsDTOList = postList.stream().map(PostEsDTO::objToDto).collect(Collectors.toList());
+        List<ChartEsDTO> chartEsDTOList = chartList.stream().map(ChartEsDTO::objToDto).collect(Collectors.toList());
         final int pageSize = 500;
-        int total = postEsDTOList.size();
-        log.info("FullSyncPostToEs start, total {}", total);
+        int total = chartEsDTOList.size();
+        log.info("FullSyncChartToEs start, total {}", total);
         for (int i = 0; i < total; i += pageSize) {
             int end = Math.min(i + pageSize, total);
             log.info("sync from {} to {}", i, end);
-            postEsDao.saveAll(postEsDTOList.subList(i, end));
+            chartEsDao.saveAll(chartEsDTOList.subList(i, end));
         }
-        log.info("FullSyncPostToEs end, total {}", total);
+        log.info("FullSyncChartToEs end, total {}", total);
     }
 }

@@ -1,6 +1,6 @@
 package com.yupi.springbootinit.mapper;
 
-import com.yupi.springbootinit.model.entity.Post;
+import com.yupi.springbootinit.model.entity.Chart;
 import java.util.Date;
 import java.util.List;
 import javax.annotation.Resource;
@@ -15,14 +15,14 @@ import org.springframework.boot.test.context.SpringBootTest;
  * @from <a href="https://yupi.icu">编程导航知识星球</a>
  */
 @SpringBootTest
-class PostMapperTest {
+class ChartMapperTest {
 
     @Resource
-    private PostMapper postMapper;
+    private ChartMapper chartMapper;
 
     @Test
-    void listPostWithDelete() {
-        List<Post> postList = postMapper.listPostWithDelete(new Date());
-        Assertions.assertNotNull(postList);
+    void listChartWithDelete() {
+        List<Chart> chartList = chartMapper.listChartWithDelete(new Date());
+        Assertions.assertNotNull(chartList);
     }
 }

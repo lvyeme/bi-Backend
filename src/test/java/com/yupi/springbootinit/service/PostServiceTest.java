@@ -1,8 +1,8 @@
 package com.yupi.springbootinit.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.yupi.springbootinit.model.dto.post.PostQueryRequest;
-import com.yupi.springbootinit.model.entity.Post;
+import com.yupi.springbootinit.model.dto.chart.ChartQueryRequest;
+import com.yupi.springbootinit.model.entity.Chart;
 import javax.annotation.Resource;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -15,17 +15,17 @@ import org.springframework.boot.test.context.SpringBootTest;
  * @from <a href="https://yupi.icu">编程导航知识星球</a>
  */
 @SpringBootTest
-class PostServiceTest {
+class ChartServiceTest {
 
     @Resource
-    private PostService postService;
+    private ChartService chartService;
 
     @Test
     void searchFromEs() {
-        PostQueryRequest postQueryRequest = new PostQueryRequest();
-        postQueryRequest.setUserId(1L);
-        Page<Post> postPage = postService.searchFromEs(postQueryRequest);
-        Assertions.assertNotNull(postPage);
+        ChartQueryRequest chartQueryRequest = new ChartQueryRequest();
+        chartQueryRequest.setUserId(1L);
+        Page<Chart> chartPage = chartService.searchFromEs(chartQueryRequest);
+        Assertions.assertNotNull(chartPage);
     }
 
 }

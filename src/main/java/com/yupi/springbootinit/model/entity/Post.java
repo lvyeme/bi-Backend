@@ -15,9 +15,9 @@ import lombok.Data;
  * @author <a href="https://github.com/liyupi">程序员鱼皮</a>
  * @from <a href="https://yupi.icu">编程导航知识星球</a>
  */
-@TableName(value = "post")
+@TableName(value = "chart")
 @Data
-public class Post implements Serializable {
+public class Chart implements Serializable {
 
     /**
      * id

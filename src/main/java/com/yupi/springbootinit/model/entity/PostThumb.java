@@ -14,9 +14,9 @@ import lombok.Data;
  * @author <a href="https://github.com/liyupi">程序员鱼皮</a>
  * @from <a href="https://yupi.icu">编程导航知识星球</a>
  */
-@TableName(value = "post_thumb")
+@TableName(value = "chart_thumb")
 @Data
-public class PostThumb implements Serializable {
+public class ChartThumb implements Serializable {
 
     /**
      * id
@@ -27,7 +27,7 @@ public class PostThumb implements Serializable {
     /**
      * 帖子 id
      */
-    private Long postId;
+    private Long chartId;
 
     /**
      * 创建用户 id

@@ -13,10 +13,10 @@ import org.springframework.boot.test.context.SpringBootTest;
  * @from <a href="https://yupi.icu">编程导航知识星球</a>
  */
 @SpringBootTest
-class PostThumbServiceTest {
+class ChartThumbServiceTest {
 
     @Resource
-    private PostThumbService postThumbService;
+    private ChartThumbService chartThumbService;
 
     private static final User loginUser = new User();
 
@@ -26,8 +26,8 @@ class PostThumbServiceTest {
     }
 
     @Test
-    void doPostThumb() {
-        int i = postThumbService.doPostThumb(1L, loginUser);
+    void doChartThumb() {
+        int i = chartThumbService.doChartThumb(1L, loginUser);
         Assertions.assertTrue(i >= 0);
     }
 }

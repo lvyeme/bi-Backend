@@ -1,7 +1,7 @@
-package com.yupi.springbootinit.model.dto.postfavour;
+package com.yupi.springbootinit.model.dto.chartfavour;
 
 import com.yupi.springbootinit.common.PageRequest;
-import com.yupi.springbootinit.model.dto.post.PostQueryRequest;
+import com.yupi.springbootinit.model.dto.chart.ChartQueryRequest;
 import java.io.Serializable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -14,12 +14,12 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class PostFavourQueryRequest extends PageRequest implements Serializable {
+public class ChartFavourQueryRequest extends PageRequest implements Serializable {
 
     /**
      * 帖子查询请求
      */
-    private PostQueryRequest postQueryRequest;
+    private ChartQueryRequest chartQueryRequest;
 
     /**
      * 用户 id

@@ -1,9 +1,9 @@
 package com.yupi.springbootinit.esdao;
 
-import com.yupi.springbootinit.model.dto.post.PostEsDTO;
-import com.yupi.springbootinit.model.dto.post.PostQueryRequest;
-import com.yupi.springbootinit.model.entity.Post;
-import com.yupi.springbootinit.service.PostService;
+import com.yupi.springbootinit.model.dto.chart.ChartEsDTO;
+import com.yupi.springbootinit.model.dto.chart.ChartQueryRequest;
+import com.yupi.springbootinit.model.entity.Chart;
+import com.yupi.springbootinit.service.ChartService;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -22,62 +22,62 @@ import org.springframework.data.domain.Sort;
  * @from <a href="https://yupi.icu">编程导航知识星球</a>
  */
 @SpringBootTest
-public class PostEsDaoTest {
+public class ChartEsDaoTest {
 
     @Resource
-    private PostEsDao postEsDao;
+    private ChartEsDao chartEsDao;
 
     @Resource
-    private PostService postService;
+    private ChartService chartService;
 
     @Test
     void test() {
-        PostQueryRequest postQueryRequest = new PostQueryRequest();
-        com.baomidou.mybatisplus.extension.plugins.pagination.Page<Post> page =
-                postService.searchFromEs(postQueryRequest);
+        ChartQueryRequest chartQueryRequest = new ChartQueryRequest();
+        com.baomidou.mybatisplus.extension.plugins.pagination.Page<Chart> page =
+                chartService.searchFromEs(chartQueryRequest);
         System.out.println(page);
     }
 
     @Test
     void testSelect() {
-        System.out.println(postEsDao.count());
-        Page<PostEsDTO> PostPage = postEsDao.findAll(
+        System.out.println(chartEsDao.count());
+        Page<ChartEsDTO> ChartPage = chartEsDao.findAll(
                 PageRequest.of(0, 5, Sort.by("createTime")));
-        List<PostEsDTO> postList = PostPage.getContent();
-        System.out.println(postList);
+        List<ChartEsDTO> chartList = ChartPage.getContent();
+        System.out.println(chartList);
     }
 
     @Test
     void testAdd() {
-        PostEsDTO postEsDTO = new PostEsDTO();
-        postEsDTO.setId(1L);
-        postEsDTO.setTitle("test");
-        postEsDTO.setContent("test");
-        postEsDTO.setTags(Arrays.asList("java", "python"));
-        postEsDTO.setThumbNum(1);
-        postEsDTO.setFavourNum(1);
-        postEsDTO.setUserId(1L);
-        postEsDTO.setCreateTime(new Date());
-        postEsDTO.setUpdateTime(new Date());
-        postEsDTO.setIsDelete(0);
-        postEsDao.save(postEsDTO);
-        System.out.println(postEsDTO.getId());
+        ChartEsDTO chartEsDTO = new ChartEsDTO();
+        chartEsDTO.setId(1L);
+        chartEsDTO.setTitle("test");
+        chartEsDTO.setContent("test");
+        chartEsDTO.setTags(Arrays.asList("java", "python"));
+        chartEsDTO.setThumbNum(1);
+        chartEsDTO.setFavourNum(1);
+        chartEsDTO.setUserId(1L);
+        chartEsDTO.setCreateTime(new Date());
+        chartEsDTO.setUpdateTime(new Date());
+        chartEsDTO.setIsDelete(0);
+        chartEsDao.save(chartEsDTO);
+        System.out.println(chartEsDTO.getId());
     }
 
     @Test
     void testFindById() {
-        Optional<PostEsDTO> postEsDTO = postEsDao.findById(1L);
-        System.out.println(postEsDTO);
+        Optional<ChartEsDTO> chartEsDTO = chartEsDao.findById(1L);
+        System.out.println(chartEsDTO);
     }
 
     @Test
     void testCount() {
-        System.out.println(postEsDao.count());
+        System.out.println(chartEsDao.count());
     }
 
     @Test
     void testFindByCategory() {
-        List<PostEsDTO> postEsDaoTestList = postEsDao.findByUserId(1L);
-        System.out.println(postEsDaoTestList);
+        List<ChartEsDTO> chartEsDaoTestList = chartEsDao.findByUserId(1L);
+        System.out.println(chartEsDaoTestList);
     }
 }

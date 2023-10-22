@@ -2,7 +2,7 @@ package com.yupi.springbootinit.model.vo;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.yupi.springbootinit.model.entity.Post;
+import com.yupi.springbootinit.model.entity.Chart;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -16,7 +16,7 @@ import org.springframework.beans.BeanUtils;
  * @from <a href="https://yupi.icu">编程导航知识星球</a>
  */
 @Data
-public class PostVO implements Serializable {
+public class ChartVO implements Serializable {
 
     private final static Gson GSON = new Gson();
 
@@ -83,36 +83,36 @@ public class PostVO implements Serializable {
     /**
      * 包装类转对象
      *
-     * @param postVO
+     * @param chartVO
      * @return
      */
-    public static Post voToObj(PostVO postVO) {
-        if (postVO == null) {
+    public static Chart voToObj(ChartVO chartVO) {
+        if (chartVO == null) {
             return null;
         }
-        Post post = new Post();
-        BeanUtils.copyProperties(postVO, post);
-        List<String> tagList = postVO.getTagList();
+        Chart chart = new Chart();
+        BeanUtils.copyProperties(chartVO, chart);
+        List<String> tagList = chartVO.getTagList();
         if (tagList != null) {
-            post.setTags(GSON.toJson(tagList));
+            chart.setTags(GSON.toJson(tagList));
         }
-        return post;
+        return chart;
     }
 
     /**
      * 对象转包装类
      *
-     * @param post
+     * @param chart
      * @return
      */
-    public static PostVO objToVo(Post post) {
-        if (post == null) {
+    public static ChartVO objToVo(Chart chart) {
+        if (chart == null) {
             return null;
         }
-        PostVO postVO = new PostVO();
-        BeanUtils.copyProperties(post, postVO);
-        postVO.setTagList(GSON.fromJson(post.getTags(), new TypeToken<List<String>>() {
+        ChartVO chartVO = new ChartVO();
+        BeanUtils.copyProperties(chart, chartVO);
+        chartVO.setTagList(GSON.fromJson(chart.getTags(), new TypeToken<List<String>>() {
         }.getType()));
-        return postVO;
+        return chartVO;
     }
 }
