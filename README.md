@@ -1,4 +1,4 @@
-# SpringBoot  X-bi项目开发
+# SpringBoot  X-bi
 
 > 作者：X
 
