@@ -2,12 +2,13 @@ package com.yupi.springbootinit.model.vo;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.yupi.springbootinit.model.entity.Chart;
+import com.yupi.springbootinit.model.entity.Post;
+import lombok.Data;
+import org.springframework.beans.BeanUtils;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-import lombok.Data;
-import org.springframework.beans.BeanUtils;
 
 /**
  * 帖子视图
@@ -16,7 +17,7 @@ import org.springframework.beans.BeanUtils;
  * @from <a href="https://yupi.icu">编程导航知识星球</a>
  */
 @Data
-public class ChartVO implements Serializable {
+public class PostVO implements Serializable {
 
     private final static Gson GSON = new Gson();
 
@@ -83,36 +84,36 @@ public class ChartVO implements Serializable {
     /**
      * 包装类转对象
      *
-     * @param chartVO
+     * @param postVO
      * @return
      */
-    public static Chart voToObj(ChartVO chartVO) {
-        if (chartVO == null) {
+    public static Post voToObj(PostVO postVO) {
+        if (postVO == null) {
             return null;
         }
-        Chart chart = new Chart();
-        BeanUtils.copyProperties(chartVO, chart);
-        List<String> tagList = chartVO.getTagList();
+        Post post = new Post();
+        BeanUtils.copyProperties(postVO, post);
+        List<String> tagList = postVO.getTagList();
         if (tagList != null) {
-            chart.setTags(GSON.toJson(tagList));
+            post.setTags(GSON.toJson(tagList));
         }
-        return chart;
+        return post;
     }
 
     /**
      * 对象转包装类
      *
-     * @param chart
+     * @param post
      * @return
      */
-    public static ChartVO objToVo(Chart chart) {
-        if (chart == null) {
+    public static PostVO objToVo(Post post) {
+        if (post == null) {
             return null;
         }
-        ChartVO chartVO = new ChartVO();
-        BeanUtils.copyProperties(chart, chartVO);
-        chartVO.setTagList(GSON.fromJson(chart.getTags(), new TypeToken<List<String>>() {
+        PostVO postVO = new PostVO();
+        BeanUtils.copyProperties(post, postVO);
+        postVO.setTagList(GSON.fromJson(post.getTags(), new TypeToken<List<String>>() {
         }.getType()));
-        return chartVO;
+        return postVO;
     }
 }

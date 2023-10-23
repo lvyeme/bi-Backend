@@ -1,7 +1,8 @@
-package com.yupi.springbootinit.model.dto.chartthumb;
+package com.yupi.springbootinit.model.dto.postthumb;
+
+import lombok.Data;
 
 import java.io.Serializable;
-import lombok.Data;
 
 /**
  * 帖子点赞请求
@@ -10,12 +11,12 @@ import lombok.Data;
  * @from <a href="https://yupi.icu">编程导航知识星球</a>
  */
 @Data
-public class ChartThumbAddRequest implements Serializable {
+public class PostThumbAddRequest implements Serializable {
 
     /**
      * 帖子 id
      */
-    private Long chartId;
+    private Long postId;
 
     private static final long serialVersionUID = 1L;
 }

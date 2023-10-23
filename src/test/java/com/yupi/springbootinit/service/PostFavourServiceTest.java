@@ -2,8 +2,8 @@ package com.yupi.springbootinit.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.yupi.springbootinit.model.entity.Chart;
-
+import com.yupi.springbootinit.model.entity.Post;
+import com.yupi.springbootinit.model.entity.User;
 import javax.annotation.Resource;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
@@ -17,10 +17,10 @@ import org.springframework.boot.test.context.SpringBootTest;
  * @from <a href="https://yupi.icu">编程导航知识星球</a>
  */
 @SpringBootTest
-class ChartFavourServiceTest {
+class PostFavourServiceTest {
 
     @Resource
-    private ChartFavourService chartFavourService;
+    private PostFavourService postFavourService;
 
     private static final User loginUser = new User();
 
@@ -30,15 +30,15 @@ class ChartFavourServiceTest {
     }
 
     @Test
-    void doChartFavour() {
-        int i = chartFavourService.doChartFavour(1L, loginUser);
+    void doPostFavour() {
+        int i = postFavourService.doPostFavour(1L, loginUser);
         Assertions.assertTrue(i >= 0);
     }
 
     @Test
-    void listFavourChartByPage() {
-        QueryWrapper<Chart> chartQueryWrapper = new QueryWrapper<>();
-        chartQueryWrapper.eq("id", 1L);
-        chartFavourService.listFavourChartByPage(Page.of(0, 1), chartQueryWrapper, loginUser.getId());
+    void listFavourPostByPage() {
+        QueryWrapper<Post> postQueryWrapper = new QueryWrapper<>();
+        postQueryWrapper.eq("id", 1L);
+        postFavourService.listFavourPostByPage(Page.of(0, 1), postQueryWrapper, loginUser.getId());
     }
 }

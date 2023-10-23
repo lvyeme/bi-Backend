@@ -1,7 +1,7 @@
 package com.yupi.springbootinit.mapper;
 
-import com.yupi.springbootinit.model.entity.ChartThumb;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.yupi.springbootinit.model.entity.PostThumb;
 
 /**
  * 帖子点赞数据库操作
@@ -9,7 +9,8 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @author <a href="https://github.com/liyupi">程序员鱼皮</a>
  * @from <a href="https://yupi.icu">编程导航知识星球</a>
  */
-public interface ChartThumbMapper extends BaseMapper<ChartThumb> {
+
+public interface PostThumbMapper extends BaseMapper<PostThumb> {
 
 }
 

@@ -1,16 +1,17 @@
 package com.yupi.springbootinit.job.cycle;
 
-import com.yupi.springbootinit.esdao.ChartEsDao;
-import com.yupi.springbootinit.mapper.ChartMapper;
-import com.yupi.springbootinit.model.dto.chart.ChartEsDTO;
-import com.yupi.springbootinit.model.entity.Chart;
-import java.util.Date;
-import java.util.List;
-import java.util.stream.Collectors;
-import javax.annotation.Resource;
+import com.yupi.springbootinit.esdao.PostEsDao;
+import com.yupi.springbootinit.mapper.PostMapper;
+import com.yupi.springbootinit.model.dto.post.PostEsDTO;
+import com.yupi.springbootinit.model.entity.Post;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.scheduling.annotation.Scheduled;
+
+import javax.annotation.Resource;
+import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 增量同步帖子到 es
@@ -21,13 +22,13 @@ import org.springframework.scheduling.annotation.Scheduled;
 // todo 取消注释开启任务
 //@Component
 @Slf4j
-public class IncSyncChartToEs {
+public class IncSyncPostToEs {
 
     @Resource
-    private ChartMapper chartMapper;
+    private PostMapper postMapper;
 
     @Resource
-    private ChartEsDao chartEsDao;
+    private PostEsDao postEsDao;
 
     /**
      * 每分钟执行一次
@@ -36,22 +37,22 @@ public class IncSyncChartToEs {
     public void run() {
         // 查询近 5 分钟内的数据
         Date fiveMinutesAgoDate = new Date(new Date().getTime() - 5 * 60 * 1000L);
-        List<Chart> chartList = chartMapper.listChartWithDelete(fiveMinutesAgoDate);
-        if (CollectionUtils.isEmpty(chartList)) {
-            log.info("no inc chart");
+        List<Post> postList = postMapper.listPostWithDelete(fiveMinutesAgoDate);
+        if (CollectionUtils.isEmpty(postList)) {
+            log.info("no inc post");
             return;
         }
-        List<ChartEsDTO> chartEsDTOList = chartList.stream()
-                .map(ChartEsDTO::objToDto)
+        List<PostEsDTO> postEsDTOList = postList.stream()
+                .map(PostEsDTO::objToDto)
                 .collect(Collectors.toList());
         final int pageSize = 500;
-        int total = chartEsDTOList.size();
-        log.info("IncSyncChartToEs start, total {}", total);
+        int total = postEsDTOList.size();
+        log.info("IncSyncPostToEs start, total {}", total);
         for (int i = 0; i < total; i += pageSize) {
             int end = Math.min(i + pageSize, total);
             log.info("sync from {} to {}", i, end);
-            chartEsDao.saveAll(chartEsDTOList.subList(i, end));
+            postEsDao.saveAll(postEsDTOList.subList(i, end));
         }
-        log.info("IncSyncChartToEs end, total {}", total);
+        log.info("IncSyncPostToEs end, total {}", total);
     }
 }

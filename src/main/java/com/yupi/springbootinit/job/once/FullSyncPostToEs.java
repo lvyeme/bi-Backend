@@ -1,15 +1,16 @@
 package com.yupi.springbootinit.job.once;
 
-import com.yupi.springbootinit.esdao.ChartEsDao;
-import com.yupi.springbootinit.model.dto.chart.ChartEsDTO;
-import com.yupi.springbootinit.model.entity.Chart;
-import com.yupi.springbootinit.service.ChartService;
-import java.util.List;
-import java.util.stream.Collectors;
-import javax.annotation.Resource;
+import com.yupi.springbootinit.esdao.PostEsDao;
+import com.yupi.springbootinit.model.dto.post.PostEsDTO;
+import com.yupi.springbootinit.model.entity.Post;
+import com.yupi.springbootinit.service.PostService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.boot.CommandLineRunner;
+
+import javax.annotation.Resource;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 全量同步帖子到 es
@@ -20,29 +21,29 @@ import org.springframework.boot.CommandLineRunner;
 // todo 取消注释开启任务
 //@Component
 @Slf4j
-public class FullSyncChartToEs implements CommandLineRunner {
+public class FullSyncPostToEs implements CommandLineRunner {
 
     @Resource
-    private ChartService chartService;
+    private PostService postService;
 
     @Resource
-    private ChartEsDao chartEsDao;
+    private PostEsDao postEsDao;
 
     @Override
     public void run(String... args) {
-        List<Chart> chartList = chartService.list();
-        if (CollectionUtils.isEmpty(chartList)) {
+        List<Post> postList = postService.list();
+        if (CollectionUtils.isEmpty(postList)) {
             return;
         }
-        List<ChartEsDTO> chartEsDTOList = chartList.stream().map(ChartEsDTO::objToDto).collect(Collectors.toList());
+        List<PostEsDTO> postEsDTOList = postList.stream().map(PostEsDTO::objToDto).collect(Collectors.toList());
         final int pageSize = 500;
-        int total = chartEsDTOList.size();
-        log.info("FullSyncChartToEs start, total {}", total);
+        int total = postEsDTOList.size();
+        log.info("FullSyncPostToEs start, total {}", total);
         for (int i = 0; i < total; i += pageSize) {
             int end = Math.min(i + pageSize, total);
             log.info("sync from {} to {}", i, end);
-            chartEsDao.saveAll(chartEsDTOList.subList(i, end));
+            postEsDao.saveAll(postEsDTOList.subList(i, end));
         }
-        log.info("FullSyncChartToEs end, total {}", total);
+        log.info("FullSyncPostToEs end, total {}", total);
     }
 }
