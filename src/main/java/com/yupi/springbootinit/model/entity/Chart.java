@@ -1,10 +1,10 @@
 package com.yupi.springbootinit.model.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
+import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Date;
-import lombok.Data;
 
 /**
  * 图表信息表
@@ -16,13 +16,18 @@ public class Chart implements Serializable {
     /**
      * id
      */
-    @TableId(type = IdType.AUTO)
+    @TableId(type = IdType.ASSIGN_ID)
     private Long id;
 
     /**
      * 分析目标
      */
     private String goal;
+
+    /**
+     * 名称
+     */
+    private String name;
 
     /**
      * 图表数据
