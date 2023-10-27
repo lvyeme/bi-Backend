@@ -1,5 +1,6 @@
 package com.yupi.springbootinit.controller;
 
+import cn.hutool.core.io.FileUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.google.gson.Gson;
@@ -30,6 +31,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * 帖子接口
@@ -258,10 +261,21 @@ public class ChartController {
         String name = genChartByAiRequest.getName();
         String goal = genChartByAiRequest.getGoal();
         String chartType = genChartByAiRequest.getChartType();
-        ThrowUtils.throwIf(StringUtils.isBlank(goal),
-                ErrorCode.PARAMS_ERROR,"目标为空");
+        //校验
+        ThrowUtils.throwIf(StringUtils.isBlank(goal),ErrorCode.PARAMS_ERROR,"目标为空");
         ThrowUtils.throwIf(StringUtils.isBlank(name) && name
                 .length() > 100,ErrorCode.PARAMS_ERROR,"名称过长");
+
+        //校验文件
+        long size = multipartFile.getSize();
+        String originalFilename = multipartFile.getOriginalFilename();
+        final long ONE_MB = 1024 * 1024L;
+        ThrowUtils.throwIf(size > ONE_MB ,ErrorCode.SYSTEM_ERROR,"文件超过 1M");
+        //校验文件后缀 .xls
+        String suffix = FileUtil.getSuffix(originalFilename);
+        final List<String> validFileSuffix = Arrays.asList("xlsx","xls");
+        ThrowUtils.throwIf(!validFileSuffix.contains(suffix),ErrorCode.PARAMS_ERROR,"文件后缀非法");
+
         User loginUser = userService.getLoginUser(request);
         long biModeId = 1659171950288818178L;
         //用户输入
@@ -278,6 +292,7 @@ public class ChartController {
         String csvData = ExcelUtils.excelToCsv(multipartFile);
         userInput.append("数据").append(csvData).append("\n");
 
+        //调用AI
         String result = aiManger.doChat(biModeId, userInput.toString());
         String[] splits = result.split("【【【【【");
         if (splits.length < 3 ){
