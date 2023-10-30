@@ -14,6 +14,7 @@ import com.yupi.springbootinit.constant.UserConstant;
 import com.yupi.springbootinit.exception.BusinessException;
 import com.yupi.springbootinit.exception.ThrowUtils;
 import com.yupi.springbootinit.manager.AiManger;
+import com.yupi.springbootinit.manager.RedisLimiterMannager;
 import com.yupi.springbootinit.model.dto.chart.*;
 import com.yupi.springbootinit.model.entity.Chart;
 import com.yupi.springbootinit.model.entity.User;
@@ -53,6 +54,9 @@ public class ChartController {
 
     @Resource
     private AiManger aiManger;
+
+    @Resource
+    private RedisLimiterMannager redisLimiterMannager;
 
     private final static Gson GSON = new Gson();
 
@@ -277,6 +281,8 @@ public class ChartController {
         ThrowUtils.throwIf(!validFileSuffix.contains(suffix),ErrorCode.PARAMS_ERROR,"文件后缀非法");
 
         User loginUser = userService.getLoginUser(request);
+        //限流判断
+        redisLimiterMannager.doRateLimit("genChartByAi_" + loginUser.getId());
         long biModeId = 1659171950288818178L;
         //用户输入
         StringBuilder userInput = new StringBuilder();

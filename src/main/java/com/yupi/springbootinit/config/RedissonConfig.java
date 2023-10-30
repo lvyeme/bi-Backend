@@ -20,7 +20,7 @@ public class RedissonConfig {
     private Integer port;
     private String password;
     // Sync and Async API
-    public RedissonClient getRedissonClient(){
+    public RedissonClient redissonClient(){
         Config config = new Config();
         config.useSingleServer()
                 .setDatabase(database)
