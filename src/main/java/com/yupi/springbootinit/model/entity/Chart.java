@@ -32,6 +32,14 @@ public class Chart implements Serializable {
     /**
      * 图表数据
      */
+    /**
+     * 任务状态
+     */
+    private String status;
+    /**
+     * 执行信息
+     */
+    private String execMessage;
     private String chartData;
 
     /**
