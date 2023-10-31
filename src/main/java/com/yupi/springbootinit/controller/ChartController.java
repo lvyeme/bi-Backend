@@ -298,7 +298,7 @@ public class ChartController {
         String csvData = ExcelUtils.excelToCsv(multipartFile);
         userInput.append("数据").append(csvData).append("\n");
 
-        //调用AI
+        //调用AI 
         String result = aiManger.doChat(biModeId, userInput.toString());
         String[] splits = result.split("【【【【【");
         if (splits.length < 3 ){
