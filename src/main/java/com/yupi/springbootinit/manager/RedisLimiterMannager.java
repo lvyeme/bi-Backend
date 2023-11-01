@@ -6,6 +6,7 @@ import org.redisson.api.RRateLimiter;
 import org.redisson.api.RateIntervalUnit;
 import org.redisson.api.RateType;
 import org.redisson.api.RedissonClient;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 
@@ -14,6 +15,7 @@ import javax.annotation.Resource;
  * @version 1.0
  * 专门提供 RedisLimiter 限流基础服务的 （提供了通用的能力）
  */
+@Service
 public class RedisLimiterMannager {
     @Resource
     private RedissonClient redissonClient;
@@ -30,7 +32,7 @@ public class RedisLimiterMannager {
         boolean canOp = rRateLimiter.tryAcquire(1);
         //如果没有令牌抛出异常
         if (!canOp){
-            throw new BusinessException(ErrorCode.TOO_MAY_REQUEST);
+            throw new BusinessException(ErrorCode.TOO_MANY_REQUEST);
         }
     }
 }

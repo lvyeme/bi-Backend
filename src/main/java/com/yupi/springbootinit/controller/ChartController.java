@@ -46,7 +46,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 @RestController
 @RequestMapping("/chart")
 @Slf4j
-public class ChartController {
+public class    ChartController {
 
     @Resource
     private ChartService chartService;
