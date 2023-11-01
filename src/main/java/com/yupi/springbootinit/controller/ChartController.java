@@ -356,6 +356,7 @@ public class ChartController {
      * @param request
      * @return
      */
+    //asd
     @PostMapping("/gen/async")
     public BaseResponse<BiResponse> genChartByAiAsync(@RequestPart("file") MultipartFile multipartFile,
                                                  GenChartByAiRequest genChartByAiRequest, HttpServletRequest request) {
