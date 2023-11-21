@@ -46,7 +46,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 @RestController
 @RequestMapping("/chart")
 @Slf4j
-public class    ChartController {
+public class ChartController {
 
     @Resource
     private ChartService chartService;
@@ -279,7 +279,7 @@ public class    ChartController {
         final long ONE_MB = 1024 * 1024L;
         ThrowUtils.throwIf(size > ONE_MB, ErrorCode.PARAMS_ERROR, "文件超过 1M");
         // 校验文件后缀 aaa.png
-        String suffix = FileUtil.getSuffix(originalFilename);
+        String suffix = FileUtil.getSuffix(originalFilename);//Hutool FileUtil
         final List<String> validFileSuffixList = Arrays.asList("xlsx");
         ThrowUtils.throwIf(!validFileSuffixList.contains(suffix), ErrorCode.PARAMS_ERROR, "文件后缀非法");
 
