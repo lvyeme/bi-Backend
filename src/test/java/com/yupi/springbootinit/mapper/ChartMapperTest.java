@@ -19,7 +19,7 @@ class ChartMapperTest {
     @Test
     void queryChartData() {
         String chartId = "1717467292467945474";
-        String querySql = String.format("select * from chart_%s",chartId);
+        String querySql = String.format("select * from chart_%s", chartId);
         List<Map<String, Object>> resultData  = chartMapper.queryChartData(querySql);
         System.out.println(resultData);
     }

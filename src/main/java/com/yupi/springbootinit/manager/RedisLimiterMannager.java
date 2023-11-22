@@ -26,6 +26,7 @@ public class RedisLimiterMannager {
      */
     public void doRateLimit(String key){
         RRateLimiter rRateLimiter = redissonClient.getRateLimiter(key);
+        //每秒最多允许请求两次
         rRateLimiter.trySetRate(RateType.OVERALL,2,1, RateIntervalUnit.SECONDS);
 
         //每当一个操作来了后，请求一个令牌
