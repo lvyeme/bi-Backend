@@ -4,7 +4,7 @@
 ## ⚡技术
 
 <div align="left">
-    <h>java</h>
+    <img src="https://img.shields.io/badge/Java-1.8%2B-%23437291?logo=openjdk&logoColor=%23437291e"/>
    
 </div>
 ```java
