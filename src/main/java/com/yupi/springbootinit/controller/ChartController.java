@@ -68,7 +68,6 @@ public class ChartController {
 
     /**
      * 创建
-     *
      * @param chartAddRequest
      * @param request
      * @return
@@ -90,7 +89,6 @@ public class ChartController {
 
     /**
      * 删除
-     *
      * @param deleteRequest
      * @param request
      * @return
@@ -115,7 +113,6 @@ public class ChartController {
 
     /**
      * 更新（仅管理员）
-     *
      * @param chartUpdateRequest
      * @return
      */
@@ -137,7 +134,6 @@ public class ChartController {
 
     /**
      * 根据 id 获取
-     *
      * @param id
      * @return
      */
@@ -155,7 +151,6 @@ public class ChartController {
 
     /**
      * 分页获取列表（封装类）
-     *
      * @param chartQueryRequest
      * @param request
      * @return
@@ -174,7 +169,6 @@ public class ChartController {
 
     /**
      * 分页获取当前用户创建的资源列表
-     *
      * @param chartQueryRequest
      * @param request
      * @return
@@ -197,7 +191,6 @@ public class ChartController {
     }
 
     // endregion
-
 
     /**
      * 编辑（用户）
@@ -257,7 +250,6 @@ public class ChartController {
 
     /**
      * 智能分析（同步）
-     *
      * @param multipartFile
      * @param genChartByAiRequest
      * @param request
@@ -345,7 +337,6 @@ public class ChartController {
         biResponse.setChartId(chart.getId());
         return ResultUtils.success(biResponse);
     }
-
 
 
     /**
@@ -441,7 +432,6 @@ public class ChartController {
         BiResponse biResponse = new BiResponse();
         biResponse.setChartId(chart.getId());
         return ResultUtils.success(biResponse);
-
     }
 
     private void handleChartUpdateError(long chartId, String execMessage) {
