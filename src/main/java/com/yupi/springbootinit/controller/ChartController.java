@@ -221,7 +221,6 @@ public class ChartController {
 
     /**
      * 获取查询包装类
-     *
      * @param ChartQueryRequest
      * @return
      */
@@ -328,6 +327,7 @@ public class ChartController {
         chart.setChartType(chartType);
         chart.setGenChart(genChart);
         chart.setGenResult(genResult);
+        chart.setStatus("succeed");
         chart.setUserId(loginUser.getId());
         boolean saveResult = chartService.save(chart);
         ThrowUtils.throwIf(!saveResult, ErrorCode.SYSTEM_ERROR, "图表保存失败");
@@ -340,8 +340,8 @@ public class ChartController {
 
 
     /**
-     * 智能文件上传分析
-     *异步
+     * 智能文件上传分析（异步）
+     *
      * @param multipartFile
      * @param genChartByAiRequest
      * @param request
